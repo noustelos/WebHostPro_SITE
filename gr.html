@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WHP | Experience</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Space+Grotesk:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body { margin: 0; overflow: hidden; background-color: #F6F5F2; font-family: 'Space Grotesk', sans-serif; }
+        .nav-container {
+            position: fixed; top: 0; width: 100%; z-index: 100;
+            padding: 1.2rem 4rem; display: flex; justify-content: space-between; align-items: center;
+            background: rgba(204, 251, 241, 0.7); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(20, 184, 166, 0.1);
+        }
+        /* Logo Link Style */
+        .logo-style { font-family: 'Syncopate', sans-serif; font-size: 1rem; letter-spacing: 0.45em; text-transform: uppercase; font-weight: 700; text-decoration: none; position: relative; z-index: 110; }
+        
+        .hero-wrapper { position: relative; height: calc(100vh - 85px); margin-top: 85px; width: 100vw; display: flex; align-items: center; justify-content: flex-end; }
+        .photo-background { position: absolute; inset: 0; z-index: 1; }
+        .photo-background img { width: 100%; height: 100%; object-fit: cover; }
+        .content-box { position: relative; z-index: 10; width: 100%; padding-right: 6%; text-align: right; }
+        
+        /* Fade-In Animation Classes */
+        .reveal { opacity: 0; transform: translateY(20px); animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+
+        .hero-desc { margin-top: 1.5rem; font-size: 1.15rem; font-weight: 700; line-height: 1.5; max-width: 420px; margin-left: auto; text-align: right; }
+        .design-btn-solid { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0.7rem 1.2rem; border-radius: 0.5rem; transition: all 0.3s ease; min-width: 170px; text-decoration: none; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); }
+        .txt-top { font-size: 10px; font-weight: 400; text-transform: uppercase; letter-spacing: 0.8em; color: rgba(255,255,255,0.9); margin-bottom: 2px; margin-right: -0.8em; }
+        .txt-bottom { font-size: 14px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.4em; color: #FFFFFF; margin-right: -0.4em; }
+    </style>
+</head>
+<body id="main-body">
+
+    <nav class="nav-container">
+        <a href="index.html" id="nav-logo" class="logo-style">WEBHOSTPRO</a>
+        
+        <div class="flex items-center gap-6">
+            <a href="en.html" class="text-xs font-bold opacity-50 hover:opacity-100 tracking-widest transition-colors">EN</a>
+            <a id="toggle-link" href="#" class="design-btn-solid">
+                <span class="txt-top">ΜΙΛΑΜΕ</span>
+                <span id="btn-bottom-text" class="txt-bottom"></span>
+            </a>
+        </div>
+    </nav>
+
+    <div class="hero-wrapper">
+        <div class="photo-background"><img id="hero-img" src="" alt="Experience"></div>
+        <div class="content-box">
+            <h1 class="title-welcome reveal delay-1">καλώς ήρθατε!</h1>
+            <span id="title-line-2" class="title-hands reveal delay-2">εδώ είστε σε καλά χέρια.</span>
+            <p id="hero-subtext" class="hero-desc reveal delay-3"></p>
+            <div class="mt-10 reveal delay-3">
+                <button id="cta-btn" class="px-10 py-4 rounded-full text-[11px] font-bold uppercase tracking-[0.3em] transition-all hover:scale-105 shadow-2xl text-white"></button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

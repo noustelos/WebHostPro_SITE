@@ -1,0 +1,119 @@
+/* --- 1. BASE & RESET --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Space Grotesk', sans-serif;
+    background-color: #F6F5F2;
+    color: #1a1a1a;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* --- 2. ANIMATIONS --- */
+@keyframes appleFadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.reveal {
+    animation: appleFadeIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes waveform {
+    0%, 100% { height: 15px; opacity: 0.5; }
+    50% { height: 60px; opacity: 1; }
+}
+
+/* --- 3. HERO CONTENT (GR.HTML) --- */
+
+/* Η ΣΗΜΑΝΤΙΚΗ ΔΙΟΡΘΩΣΗ: ΕΞΩ ΑΠΟ ΤΑ MEDIA QUERIES */
+.hero-desc {
+    margin-top: 1.5rem;
+    font-size: 1.15rem;
+    font-weight: 700;
+    line-height: 1.5;
+    max-width: 450px; 
+    margin-left: auto; /* Σπρώχνει το container δεξιά */
+    text-align: center; /* Κεντράρει το κείμενο ΜΕΣΑ στο container */
+    color: #042f2e !important; /* ΠΟΛΥ ΣΚΟΥΡΟ TEAL */
+    display: block;
+    text-shadow: none !important;
+}
+
+/* Στο Tech Mode (Μαύρη σελίδα) το θέλουμε λευκό */
+.mode-tech .hero-desc {
+    color: #ffffff !important;
+}
+
+.title-welcome {
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 700;
+    line-height: 1.1;
+    color: #0d9488;
+    text-transform: lowercase;
+}
+
+.title-hands {
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    font-weight: 400;
+    color: #14b8a6;
+    text-transform: lowercase;
+    margin-top: 0.2rem;
+    display: block;
+}
+
+/* --- 4. NAVIGATION & HEADER --- */
+.nav-container {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    padding: 1.2rem 4rem; display: flex; justify-content: space-between; align-items: center;
+    background: rgba(204, 251, 241, 0.7); 
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(20, 184, 166, 0.1);
+}
+
+.logo-style {
+    font-family: 'Syncopate', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 0.45em;
+    text-transform: uppercase;
+    color: #065f46;
+    font-weight: 700;
+}
+
+/* --- 5. BUTTONS --- */
+.design-btn-solid {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 0.7rem 1.2rem; border-radius: 0.5rem; 
+    transition: all 0.3s ease;
+    min-width: 170px;
+    text-decoration: none;
+}
+
+.bg-red-solid { background-color: #FF3B30; }
+.bg-blue-solid { background-color: #007AFF; }
+
+/* --- 6. RESPONSIVE --- */
+@media (max-width: 1024px) {
+    .nav-container { padding: 1.2rem 2rem; }
+    .content-box { padding-right: 5%; }
+}
+
+@media (max-width: 768px) {
+    .hero-wrapper { 
+        margin-top: 100px;
+        justify-content: center; 
+    }
+    .content-box { 
+        padding-right: 0; 
+        text-align: center; 
+        padding: 20px;
+    }
+    .hero-desc {
+        margin: 1.5rem auto; /* Κεντράρισμα για κινητά */
+    }
+}
