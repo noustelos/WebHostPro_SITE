@@ -3,62 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WebHostPro | Experience</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>WebHostPro | Welcome</title>
+    <link rel="preload" as="image" href="assets/blue_fem_1.jpeg">
+<link rel="preload" as="image" href="assets/red_fem_1.jpeg">
     <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Space+Grotesk:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="mode-simple">
+<body class="bg-deep-slate">
 
     <div id="intro-screen">
-    <div class="intro-glow"></div>
-    <div class="pulse-circle"></div>
-    <div class="intro-logo">WEBHOSTPRO</div>
-</div>
-
-    <div id="gateway">
-        <div class="glass-panel">
-            <h2 class="gateway-title">πως θέλετε να μιλήσουμε;</h2>
-            <div class="choice-buttons">
-                <button onclick="setMode('simple')" class="glass-btn simple">
-                    <span class="btn-sub">ΜΙΛΑΜΕ</span>
-                    <span class="btn-main">ΑΠΛΑ</span>
-                </button>
-                <button onclick="setMode('tech')" class="glass-btn technical">
-                    <span class="btn-sub">ΜΙΛΑΜΕ</span>
-                    <span class="btn-main">ΤΕΧΝΙΚΑ</span>
-                </button>
-            </div>
-        </div>
+        <div class="pulse-circle"></div>
+        <div class="intro-logo">WEBHOSTPRO</div>
     </div>
 
-    <main id="main-content" class="hidden-content">
-        <nav class="nav-container">
-            <a href="#" onclick="resetToGateway()" id="nav-logo" class="logo-style">WEBHOSTPRO</a>
-            <div class="flex items-center gap-6">
-                <a href="en.html" class="text-xs font-bold opacity-50 hover:opacity-100 tracking-widest transition-colors">EN</a>
-                <a id="toggle-link" href="#" onclick="toggleModeUI(event)" class="design-btn-solid">
-                    <span class="txt-top">ΜΙΛΑΜΕ</span>
-                    <span id="btn-bottom-text" class="txt-bottom"></span>
-                </a>
+    <div id="gateway" class="active">
+        <div class="glass-panel">
+            <h2 class="gateway-title">Επιλέξτε την εμπειρία σας</h2>
+            <div class="choice-buttons">
+                <button onclick="setMode('simple')" class="glass-btn">
+                    <span class="btn-sub">ΓΙΑ ΟΛΟΥΣ</span>
+                    <span class="btn-main" style="color: #38BDF8;">SIMPLE</span>
+                </button>
+                <button onclick="setMode('tech')" class="glass-btn">
+                    <span class="btn-sub">ΓΙΑ ΕΠΑΓΓΕΛΜΑΤΙΕΣ</span>
+                    <span class="btn-main" style="color: #F97316;">TECHNICAL</span>
+                </button>
             </div>
-        </nav>
-
-        <div class="hero-wrapper">
-            <div class="photo-layers">
-                <img id="img-simple" src="assets/blue_fem_1.jpeg" class="hero-img active">
-                <img id="img-tech" src="assets/red_fem_1.jpeg" class="hero-img">
-            </div>
-            <div class="content-box container">
-                <h1 id="title-line-1" class="title-welcome reveal delay-1">καλώς ήρθατε!</h1>
-                <span id="title-line-2" class="title-hands reveal delay-2">εδώ είστε σε καλά χέρια.</span>
-                <p id="hero-subtext" class="hero-desc reveal delay-3"></p>
-                <div class="mt-10 reveal delay-3">
-                    <button id="cta-btn" class="cta-primary">ΜΑΘΕΤΕ ΠΕΡΙΣΣΟΤΕΡΑ</button>
-                </div>
-            </div>
+            <p class="gateway-hint">Δεν είστε σίγουροι; Ξεκινήστε απλά.</p>
         </div>
-    </main>
+    </div>
 
     <script src="script.js"></script>
 </body>
