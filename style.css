@@ -1,119 +1,398 @@
-/* --- 1. BASE & RESET --- */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/* 🎨 1. GLOBAL COLOR SYSTEM & DESIGN TOKENS */
+:root {
+    --bg-primary: #F6F5F2;
+    --bg-dark: #0E1116;
+    --brand-primary: #0D9488;
+    --brand-secondary: #14B8A6;
+    --brand-deep: #042F2E;
+    --accent-simple: #007AFF;
+    --accent-technical: #FF3B30;
+    --glass-dark: rgba(15, 15, 15, 0.92);
+    --transition-smooth: 1.2s cubic-bezier(.22, 1, .36, 1);
+}
+
+/* 🧱 2. BASE RESET */
+* { 
+    box-sizing: border-box; 
+    margin: 0; 
+    padding: 0; 
 }
 
 body {
+    background-color: var(--bg-primary);
+    color: var(--brand-deep);
     font-family: 'Space Grotesk', sans-serif;
-    background-color: #F6F5F2;
-    color: #1a1a1a;
-    line-height: 1.6;
+    transition: background-color 0.8s ease;
     overflow-x: hidden;
+    width: 100%;
+    height: 100%;
 }
 
-/* --- 2. ANIMATIONS --- */
-@keyframes appleFadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.reveal {
-    animation: appleFadeIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-@keyframes waveform {
-    0%, 100% { height: 15px; opacity: 0.5; }
-    50% { height: 60px; opacity: 1; }
-}
-
-/* --- 3. HERO CONTENT (GR.HTML) --- */
-
-/* Η ΣΗΜΑΝΤΙΚΗ ΔΙΟΡΘΩΣΗ: ΕΞΩ ΑΠΟ ΤΑ MEDIA QUERIES */
-.hero-desc {
-    margin-top: 1.5rem;
-    font-size: 1.15rem;
-    font-weight: 700;
-    line-height: 1.5;
-    max-width: 450px; 
-    margin-left: auto; /* Σπρώχνει το container δεξιά */
-    text-align: center; /* Κεντράρει το κείμενο ΜΕΣΑ στο container */
-    color: #042f2e !important; /* ΠΟΛΥ ΣΚΟΥΡΟ TEAL */
-    display: block;
-    text-shadow: none !important;
-}
-
-/* Στο Tech Mode (Μαύρη σελίδα) το θέλουμε λευκό */
-.mode-tech .hero-desc {
-    color: #ffffff !important;
-}
-
-.title-welcome {
-    font-size: clamp(2rem, 4vw, 3.2rem);
-    font-weight: 700;
-    line-height: 1.1;
-    color: #0d9488;
-    text-transform: lowercase;
-}
-
-.title-hands {
-    font-size: clamp(1.5rem, 3vw, 2.5rem);
-    font-weight: 400;
-    color: #14b8a6;
-    text-transform: lowercase;
-    margin-top: 0.2rem;
-    display: block;
-}
-
-/* --- 4. NAVIGATION & HEADER --- */
+/* 🏢 3. NAVIGATION (HEADER) */
 .nav-container {
-    position: fixed; top: 0; width: 100%; z-index: 100;
-    padding: 1.2rem 4rem; display: flex; justify-content: space-between; align-items: center;
+    position: fixed; 
+    top: 0; 
+    width: 100%; 
+    z-index: 100;
+    padding: 1.2rem 4rem; 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
     background: rgba(204, 251, 241, 0.7); 
-    backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px); 
     -webkit-backdrop-filter: blur(20px);
     border-bottom: 1px solid rgba(20, 184, 166, 0.1);
 }
 
-.logo-style {
-    font-family: 'Syncopate', sans-serif;
-    font-size: 1rem;
-    letter-spacing: 0.45em;
-    text-transform: uppercase;
-    color: #065f46;
-    font-weight: 700;
+.logo-style { 
+    font-family: 'Syncopate', sans-serif; 
+    font-size: 1rem; 
+    letter-spacing: 0.6em; 
+    text-transform: uppercase; 
+    font-weight: 700; 
+    text-decoration: none; 
+    color: var(--brand-deep);
 }
 
-/* --- 5. BUTTONS --- */
-.design-btn-solid {
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    padding: 0.7rem 1.2rem; border-radius: 0.5rem; 
+.design-btn-solid { 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+    padding: 0.7rem 1.2rem; 
+    border-radius: 0.5rem; 
+    transition: all 0.3s ease; 
+    min-width: 170px; 
+    text-decoration: none; 
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); 
+}
+
+.txt-top { font-size: 10px; font-weight: 400; text-transform: uppercase; letter-spacing: 0.8em; color: rgba(255,255,255,0.9); margin-bottom: 2px; }
+.txt-bottom { font-size: 14px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.4em; color: #FFFFFF; }
+
+/* 🎬 4. CINEMATIC INTRO SCREEN - STABLE CENTER */
+#intro-screen { 
+    position: fixed; 
+    inset: 0;
+    background: var(--bg-primary); 
+    z-index: 9999; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+    gap: 50px;
+}
+
+/* 🟢 ΤΟ ΝΕΟ ΕΝΤΟΝΟ PULSE CIRCLE (Αντικαθιστά το #bars) */
+.pulse-circle {
+    width: 110px;
+    height: 110px;
+    background: var(--brand-primary);
+    border-radius: 50%;
+    position: relative;
+    box-shadow: 0 0 40px rgba(13, 148, 136, 0.4);
+    animation: corePulse 2s ease-in-out infinite;
+}
+
+.pulse-circle::after {
+    content: '';
+    position: absolute;
+    inset: -20px;
+    border: 2px solid var(--brand-secondary);
+    border-radius: 50%;
+    opacity: 0;
+    animation: ringPulse 2s ease-out infinite;
+}
+
+@keyframes corePulse {
+    0%, 100% { transform: scale(1); opacity: 0.9; }
+    50% { transform: scale(1.15); opacity: 1; box-shadow: 0 0 60px rgba(13, 148, 136, 0.6); }
+}
+
+@keyframes ringPulse {
+    0% { transform: scale(1); opacity: 0.6; }
+    100% { transform: scale(1.8); opacity: 0; }
+}
+
+.intro-logo { 
+    font-family: 'Syncopate'; 
+    font-size: 14px; 
+    letter-spacing: 1.2em; 
+    color: var(--brand-deep);
+    opacity: 0;
+    animation: fadeInOut 5s ease-in-out forwards;
+    margin-right: -1.2em; 
+}
+
+/* 💎 5. GLASS GATEWAY */
+#gateway { 
+    position: fixed; 
+    inset: 0;
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    z-index: 9500; 
+    opacity: 0; 
+    pointer-events: none; 
+    transition: opacity 1.2s ease; 
+    background: rgba(0,0,0,0.5); 
+}
+
+#gateway.active { 
+    opacity: 1; 
+    pointer-events: auto; 
+}
+
+/* 💎 5. GLASS GATEWAY - ARISTOCRATIC FADE IN */
+#gateway { 
+    position: fixed; 
+    inset: 0;
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    z-index: 9500; 
+    opacity: 0; 
+    pointer-events: none; 
+    /* Αργή μετάβαση 2.5 δευτερολέπτων */
+    transition: opacity 2.5s cubic-bezier(0.4, 0, 0.2, 1); 
+    background: rgba(0,0,0,0.6); 
+}
+
+#gateway.active { 
+    opacity: 1; 
+    pointer-events: auto; 
+}
+
+.glass-panel { 
+    background: var(--glass-dark); 
+    backdrop-filter: blur(25px) saturate(160%); 
+    -webkit-backdrop-filter: blur(25px) saturate(160%); 
+    padding: clamp(30px, 5vw, 60px); 
+    border-radius: 32px; 
+    border: 1px solid rgba(255,255,255,0.15);
+    box-shadow: 0 50px 100px rgba(0,0,0,0.5);
+    width: min(90%, 650px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    /* Αριστοκρατικό Fade-in για το εσωτερικό του πάνελ */
+    opacity: 0;
+    transform: scale(0.98); /* Ελαφρύ "βάθος" κατά την εμφάνιση */
+    transition: opacity 2.5s ease-out, transform 2.5s ease-out;
+}
+
+#gateway.active .glass-panel { 
+    opacity: 1; 
+    transform: scale(1);
+}
+
+.gateway-title { 
+    color: #FFFFFF !important;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(1.2rem, 3vw, 1.6rem);
+    letter-spacing: 0.1em;
+    margin-bottom: 2.5rem;
+    text-transform: lowercase;
+    font-weight: 300;
+    text-align: center;
+}
+/* 💎 6. GATEWAY BUTTONS - COLOR FIXES */
+.choice-buttons { display: flex; gap: 20px; width: 100%; justify-content: center; }
+
+.glass-btn {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 20px;
+    border-radius: 18px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     transition: all 0.3s ease;
-    min-width: 170px;
-    text-decoration: none;
 }
 
-.bg-red-solid { background-color: #FF3B30; }
-.bg-blue-solid { background-color: #007AFF; }
+.glass-btn.simple .btn-main { color: var(--accent-simple) !important; }
+.glass-btn.technical .btn-main { color: var(--accent-technical) !important; }
 
-/* --- 6. RESPONSIVE --- */
-@media (max-width: 1024px) {
-    .nav-container { padding: 1.2rem 2rem; }
-    .content-box { padding-right: 5%; }
+.btn-sub { font-size: 8px; letter-spacing: 0.5em; color: rgba(255,255,255,0.5); margin-bottom: 4px; }
+.btn-main { font-size: 1.3rem; font-weight: 800; letter-spacing: 0.2em; text-transform: uppercase; }
+
+/* ... τα προηγούμενα styles σου (root, nav κλπ) ... */
+
+/* 🏡 7. HERO / MAIN CONTENT SECTION - MAXIMUM COMPATIBILITY */
+.hero-wrapper { 
+    position: relative; 
+    height: 100vh; 
+    width: 100%; /* Αλλαγή σε 100% για σιγουριά */
+    display: flex !important; 
+    flex-direction: row !important;
+    align-items: center !important; 
+    justify-content: flex-end !important; /* Σπρώξιμο όλου του περιεχομένου δεξιά */
 }
 
+.content-box { 
+    position: relative; 
+    z-index: 10; 
+    width: 100% !important;
+    max-width: 1200px; /* Όριο για μεγάλες οθόνες */
+    padding-right: 8% !important; /* Απόσταση από δεξιά */
+    text-align: right !important; 
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-end !important; /* Στοίχιση των παιδιών (H1, P) δεξιά */
+}
+
+/* Επιβολή στοίχισης σε κάθε στοιχείο ξεχωριστά */
+.title-welcome, .title-hands { 
+    width: 100% !important;
+    text-align: right !important;
+    display: block !important;
+}
+
+.title-welcome { 
+    font-size: clamp(2.2rem, 5vw, 4rem); 
+    color: #0d9488; 
+    font-weight: 900; 
+    line-height: 1.1; 
+}
+
+.title-hands { 
+    font-size: clamp(1.6rem, 4vw, 2.8rem); 
+    color: #14b8a6; 
+    font-weight: 700; 
+}
+
+.hero-desc { 
+    margin-top: 1.5rem !important; 
+    font-size: 1.1rem; 
+    font-weight: 700; 
+    line-height: 1.6; 
+    max-width: 480px; 
+    color: #042f2e !important; 
+    /* Κλείδωμα δεξιά */
+    margin-left: auto !important; 
+    margin-right: 0 !important;
+    text-align: right !important;
+}
+
+/* Κουμπί CTA */
+.mt-10 {
+    margin-top: 2.5rem !important;
+    width: 100% !important;
+    display: flex !important;
+    justify-content: flex-end !important;
+}
+
+.cta-primary {
+    background-color: #14B8A6;
+    color: white;
+    padding: 1rem 2.5rem;
+    border-radius: 50px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+/* 📱 10. RESPONSIVE (IPAD PORTRAIT & MOBILE) */
 @media (max-width: 768px) {
     .hero-wrapper { 
-        margin-top: 100px;
-        justify-content: center; 
+        justify-content: center !important; 
     }
     .content-box { 
-        padding-right: 0; 
-        text-align: center; 
-        padding: 20px;
+        padding-right: 5% !important;
+        padding-left: 5% !important;
+        text-align: center !important; 
+        align-items: center !important; 
     }
     .hero-desc {
-        margin: 1.5rem auto; /* Κεντράρισμα για κινητά */
+        margin-right: auto !important;
+        text-align: center !important;
     }
+    .mt-10 {
+        justify-content: center !important;
+    }
+    .title-welcome, .title-hands {
+        text-align: center !important;
+    }
+}
+/* 🔘 ΕΠΑΝΑΦΟΡΑ ΚΟΥΜΠΙΟΥ CTA ΔΕΞΙΑ */
+.mt-10 {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 2.5rem;
+}
+
+.cta-primary {
+    background-color: #14B8A6;
+    color: white;
+    padding: 1rem 2.5rem;
+    border-radius: 50px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    transition: all 0.3s ease;
+}
+
+/* 📱 10. RESPONSIVE (IPAD PORTRAIT & MOBILE) */
+@media (max-width: 1024px) {
+    .hero-wrapper { 
+        grid-template-columns: 1fr; /* Επιστροφή σε μονή στήλη */
+    }
+    .content-box { 
+        grid-column: 1;
+        padding: 0 5%;
+        text-align: center; 
+        align-items: center; /* Κεντράρισμα μόνο στα κινητά */
+    }
+    .hero-desc {
+        margin-right: auto;
+        text-align: center;
+    }
+    .mt-10 {
+        justify-content: center;
+    }
+}
+
+/* 📱 MOBILE/IPAD FIX - ΜΟΝΟ ΕΚΕΙ ΣΤΟ ΚΕΝΤΡΟ */
+@media (max-width: 1024px) {
+    .hero-wrapper { justify-content: center; }
+    .content-box { padding-right: 0; text-align: center; }
+    .hero-desc { margin-right: auto; }
+}
+/* 🖼️ 8. IMAGES & TRANSITIONS */
+.photo-layers { position: absolute; inset: 0; z-index: 1; }
+.hero-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1s ease; }
+.hero-img.active { opacity: 1; }
+
+.hidden-content { opacity: 0; pointer-events: none; transition: opacity 1s ease; }
+.show-content { opacity: 1 !important; pointer-events: auto !important; }
+
+/* 🎞️ 9. ANIMATIONS */
+@keyframes pulseGlow {
+    0% { transform: scale(.9); opacity: .6; }
+    50% { transform: scale(1.05); opacity: 1; }
+    100% { transform: scale(1); opacity: 0; }
+}
+
+@keyframes fadeInOut {
+    0% { opacity: 0; transform: translateY(10px); }
+    20% { opacity: 1; transform: translateY(0); }
+    80% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+.reveal { opacity: 0; transform: translateY(20px); animation: fadeInUp 0.8s forwards; }
+@keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+.delay-1 { animation-delay: 0.2s; } 
+.delay-2 { animation-delay: 0.4s; } 
+.delay-3 { animation-delay: 0.6s; }
+
+/* 📱 10. RESPONSIVE MEDIA QUERIES */
+@media (max-width: 1024px) {
+    .nav-container { padding: 1.2rem 2rem; }
+    .content-box { padding-right: 0; text-align: center; justify-content: center; }
+    .hero-desc { margin-right: auto; text-align: center; }
+    .choice-buttons { flex-direction: column; align-items: center; }
+    .glass-btn { width: 100%; max-width: 400px; }
 }

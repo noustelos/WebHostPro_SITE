@@ -5,41 +5,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WebHostPro | Experience</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Space+Grotesk:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Space+Grotesk:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-[#F6F5F2] overflow-hidden">
+<body class="mode-simple">
 
-    <div id="screen-pulse" class="fixed inset-0 flex items-center justify-center z-40 transition-opacity duration-[800ms]">
-        <div class="absolute inset-0 animate-gradient-slow bg-gradient-to-br from-[#F6F5F2] via-[#D1D1D1] to-[#F6F5F2] bg-[length:400%_400%] opacity-100"></div>
-        <div class="relative w-80 h-80 md:w-[480px] md:h-[480px] flex items-center justify-center scale-110" id="waveform-container">
-            <div class="absolute inset-0 rounded-full border-2 border-gray-400 backdrop-blur-sm bg-white/20 shadow-2xl"></div>
-            <svg viewBox="0 0 200 200" class="w-full h-full transform scale-90">
-                <g id="bars"></g>
-            </svg>
-        </div>
-    </div>
+    <div id="intro-screen">
+    <div class="intro-glow"></div>
+    <div class="pulse-circle"></div>
+    <div class="intro-logo">WEBHOSTPRO</div>
+</div>
 
-    <div id="screen-choice" class="fixed inset-0 z-50 transform -translate-y-full transition-transform duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] flex flex-col items-center justify-center p-6" 
-         style="background-color: rgba(28, 18, 8, 0.92); backdrop-filter: blur(45px); -webkit-backdrop-filter: blur(45px);">
-        
-        <div class="mb-24 text-center opacity-0 transition-all duration-1000 delay-500" id="choice-content">
-            <h2 class="text-white/90 text-xl md:text-2xl font-light tracking-[0.45em] uppercase font-['Syncopate']">WebHostPro</h2>
-            <div class="h-[1px] bg-blue-500/50 mt-4 w-full max-w-[200px] mx-auto"></div>
-            
-            <div class="flex flex-col md:flex-row gap-8 mt-20 w-full max-w-lg">
-                <a href="gr.html?mode=simple" class="group flex-1 py-10 px-4 rounded-xl bg-white/5 border border-white/10 text-center transition-all duration-500 hover:bg-white/10 hover:border-blue-500/50 active:scale-95 flex flex-col items-center justify-center">
-                    <span class="text-white/30 text-[9px] uppercase tracking-[1em] mb-3 group-hover:text-blue-400 transition-colors">ΜΙΛΑΜΕ</span>
-                    <span class="text-[#007AFF] text-xl font-bold uppercase tracking-[0.6em] ml-[0.6em]">ΑΠΛΑ</span>
-                </a>
-
-                <a href="gr.html?mode=tech" class="group flex-1 py-10 px-4 rounded-xl bg-white/5 border border-white/10 text-center transition-all duration-500 hover:bg-white/10 hover:border-red-500/50 active:scale-95 flex flex-col items-center justify-center">
-                    <span class="text-white/30 text-[9px] uppercase tracking-[1em] mb-3 group-hover:text-red-400 transition-colors">ΜΙΛΑΜΕ</span>
-                    <span class="text-[#FF3B30] text-xl font-bold uppercase tracking-[0.6em] ml-[0.6em]">ΤΕΧΝΙΚΑ</span>
-                </a>
+    <div id="gateway">
+        <div class="glass-panel">
+            <h2 class="gateway-title">πως θέλετε να μιλήσουμε;</h2>
+            <div class="choice-buttons">
+                <button onclick="setMode('simple')" class="glass-btn simple">
+                    <span class="btn-sub">ΜΙΛΑΜΕ</span>
+                    <span class="btn-main">ΑΠΛΑ</span>
+                </button>
+                <button onclick="setMode('tech')" class="glass-btn technical">
+                    <span class="btn-sub">ΜΙΛΑΜΕ</span>
+                    <span class="btn-main">ΤΕΧΝΙΚΑ</span>
+                </button>
             </div>
         </div>
     </div>
+
+    <main id="main-content" class="hidden-content">
+        <nav class="nav-container">
+            <a href="#" onclick="resetToGateway()" id="nav-logo" class="logo-style">WEBHOSTPRO</a>
+            <div class="flex items-center gap-6">
+                <a href="en.html" class="text-xs font-bold opacity-50 hover:opacity-100 tracking-widest transition-colors">EN</a>
+                <a id="toggle-link" href="#" onclick="toggleModeUI(event)" class="design-btn-solid">
+                    <span class="txt-top">ΜΙΛΑΜΕ</span>
+                    <span id="btn-bottom-text" class="txt-bottom"></span>
+                </a>
+            </div>
+        </nav>
+
+        <div class="hero-wrapper">
+            <div class="photo-layers">
+                <img id="img-simple" src="assets/blue_fem_1.jpeg" class="hero-img active">
+                <img id="img-tech" src="assets/red_fem_1.jpeg" class="hero-img">
+            </div>
+            <div class="content-box container">
+                <h1 id="title-line-1" class="title-welcome reveal delay-1">καλώς ήρθατε!</h1>
+                <span id="title-line-2" class="title-hands reveal delay-2">εδώ είστε σε καλά χέρια.</span>
+                <p id="hero-subtext" class="hero-desc reveal delay-3"></p>
+                <div class="mt-10 reveal delay-3">
+                    <button id="cta-btn" class="cta-primary">ΜΑΘΕΤΕ ΠΕΡΙΣΣΟΤΕΡΑ</button>
+                </div>
+            </div>
+        </div>
+    </main>
 
     <script src="script.js"></script>
 </body>

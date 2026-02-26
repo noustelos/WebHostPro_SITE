@@ -1,100 +1,104 @@
+/**
+ * WebHostPro Master Script
+ * Version: 2.3 (6s Timing & Smooth Gateway Fix)
+ */
+
 document.addEventListener('DOMContentLoaded', () => {
+    const introScreen = document.getElementById('intro-screen');
+    const gateway = document.getElementById('gateway');
     
-    /* --- 1. INDEX LOGIC (WAVEFORM & TRANSITION) --- */
-    const barsContainer = document.getElementById('bars');
-    if (barsContainer) {
-        for (let i = 0; i < 36; i++) {
-            const rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-            rect.setAttribute("x", "98"); rect.setAttribute("y", "20");
-            rect.setAttribute("width", "3"); rect.setAttribute("height", (15 + Math.random() * 35).toString());
-            rect.setAttribute("rx", "1.5"); rect.setAttribute("fill", "#333"); 
-            rect.setAttribute("transform", `rotate(${i * 10} 100 100)`);
-            rect.style.animation = `waveform 1.5s ease-in-out infinite`;
-            rect.style.animationDelay = `${i * 0.1}s`;
-            barsContainer.appendChild(rect);
-        }
-    }
+    // Ρύθμιση στα 6 δευτερόλεπτα (6000ms)
+    const hasVisited = sessionStorage.getItem('whp_session_active');
+    const waitTime = hasVisited ? 500 : 6000; 
 
-    // ΤΟ ΚΟΜΜΑΤΙ ΠΟΥ ΕΛΕΙΠΕ: Η μετάβαση από το Waveform στην Κουρτίνα
-    const screenPulse = document.getElementById('screen-pulse');
-    const screenChoice = document.getElementById('screen-choice');
-    const choiceContent = document.getElementById('choice-content');
-
-    if (screenPulse && screenChoice && choiceContent) {
-        setTimeout(() => {
-            // 1. Κατεβαίνει η κουρτίνα
-            screenChoice.classList.remove('-translate-y-full');
-            screenChoice.classList.add('translate-y-0');
+    setTimeout(() => {
+        if (introScreen && gateway) {
+            // 1. Ενεργοποιούμε το Gateway (ξεκινάει το αργό fade in)
+            gateway.classList.add('active');
             
-            // 2. Σβήνει το waveform (fade out)
-            setTimeout(() => {
-                screenPulse.style.transition = 'opacity 0.5s ease-out';
-                screenPulse.style.opacity = '0';
-                setTimeout(() => screenPulse.style.display = 'none', 500);
-            }, 200);
+            // 2. Ταυτόχρονα, ξεκινάμε το fade out του Intro/Pulse
+            // Χρησιμοποιούμε τον ίδιο χρόνο (2.5s) για τέλειο cross-fade
+            introScreen.style.transition = 'opacity 2.5s cubic-bezier(0.4, 0, 0.2, 1)';
+            introScreen.style.opacity = '0';
             
-            // 3. Εμφανίζονται τα κείμενα/κουμπιά
+            // 3. Αφαιρούμε το intro από το προσκήνιο αφού ολοκληρωθεί το εφέ
             setTimeout(() => {
-                choiceContent.classList.remove('opacity-0');
-                choiceContent.classList.add('opacity-100');
-            }, 800);
-        }, 3000); // 3 δευτερόλεπτα αναμονή
-    }
-
-    /* --- 2. GR.HTML IDENTICAL MIRROR LOGIC --- */
-    const urlParams = new URLSearchParams(window.location.search);
-    const mode = urlParams.get('mode');
-    
-    const body = document.getElementById('main-body');
-    const img = document.getElementById('hero-img');
-    const subtext = document.getElementById('hero-subtext');
-    const toggleLink = document.getElementById('toggle-link');
-    const btnBottomText = document.getElementById('btn-bottom-text');
-    const ctaBtn = document.getElementById('cta-btn');
-    const logo = document.getElementById('nav-logo');
-    const titleWelcome = document.querySelector('.title-welcome');
-    const titleHands = document.querySelector('.title-hands');
-
-    if (body) {
-        // Κοινά Στοιχεία
-        if(ctaBtn) {
-            ctaBtn.innerText = 'ΜΑΘΕΤΕ ΠΕΡΙΣΣΟΤΕΡΑ';
-            ctaBtn.style.setProperty('background-color', '#14B8A6', 'important');
-            ctaBtn.style.setProperty('color', '#ffffff', 'important');
+                introScreen.style.display = 'none';
+            }, 2500);
         }
-        if(titleWelcome) titleWelcome.style.setProperty('color', '#0d9488', 'important');
-        if(titleHands) titleHands.style.setProperty('color', '#14b8a6', 'important');
-
-        if (mode === 'tech') {
-            /* --- TECH MODE --- */
-            body.className = 'mode-tech bg-black';
-            if(img) img.src = 'assets/red_fem_1.jpeg';
-            if(logo) logo.style.setProperty('color', '#2dd4bf', 'important');
-            if(subtext) {
-                subtext.style.setProperty('color', '#042f2e', 'important'); 
-                subtext.style.setProperty('text-align', 'right', 'important');
-                subtext.innerHTML = 'θα μιλούσαμε μαζί σας binary<br>αλλά η python είναι πιο απλή.';
-            }
-            if(btnBottomText) btnBottomText.innerText = 'ΑΠΛΑ';
-            if(toggleLink) {
-                toggleLink.href = 'gr.html?mode=simple';
-                toggleLink.style.setProperty('background-color', '#007AFF', 'important');
-            }
-        } else {
-            /* --- SIMPLE MODE --- */
-            body.className = 'mode-simple bg-[#F6F5F2]';
-            if(img) img.src = 'assets/blue_fem_1.jpeg';
-            if(logo) logo.style.setProperty('color', '#065f46', 'important');
-            if(subtext) {
-                subtext.style.setProperty('color', '#042f2e', 'important');
-                subtext.style.setProperty('text-align', 'right', 'important');
-                subtext.innerHTML = 'η τεχνολογία γίνεται κατανοητή<br>όταν την χειρίζονται άνθρωποι που μιλάνε απλά.';
-            }
-            if(btnBottomText) btnBottomText.innerText = 'ΤΕΧΝΙΚΑ';
-            if(toggleLink) {
-                toggleLink.href = 'gr.html?mode=tech';
-                toggleLink.style.setProperty('background-color', '#FF3B30', 'important');
-            }
-        }
-    }
+        sessionStorage.setItem('whp_session_active', 'true');
+    }, waitTime);
 });
+
+// ... setMode, applyModeLogic και toggleModeUI παραμένουν όπως τα έχουμε διορθώσει ...
+/* --- 3. SET MODE (Επιλογή από το Τζάμι) --- */
+function setMode(mode) {
+    const gateway = document.getElementById('gateway');
+    const main = document.getElementById('main-content');
+    
+    if (gateway) {
+        // Το τζάμι ανεβαίνει προς τα πάνω (αφαίρεση active)
+        gateway.classList.remove('active'); 
+        
+        setTimeout(() => {
+            gateway.style.display = 'none';
+            if (main) {
+                // Αποκάλυψη του κυρίως site (Hero Section)
+                main.classList.add('show-content');
+                applyModeLogic(mode);
+            }
+        }, 800);
+    }
+}
+
+/* --- 4. APPLY MODE LOGIC (Simple / Tech) --- */
+function applyModeLogic(mode) {
+    const body = document.body;
+    const subtext = document.getElementById('hero-subtext');
+    const imgSimple = document.getElementById('img-simple');
+    const imgTech = document.getElementById('img-tech');
+    const btnBottomText = document.getElementById('btn-bottom-text');
+    const toggleLink = document.getElementById('toggle-link');
+    const ctaBtn = document.getElementById('cta-btn');
+
+    // Καθαρισμός κλάσεων για το body
+    body.classList.remove('mode-tech', 'mode-simple');
+
+    if (mode === 'tech') {
+        body.classList.add('mode-tech');
+        if(imgSimple) imgSimple.classList.remove('active');
+        if(imgTech) imgTech.classList.add('active');
+        
+        if(subtext) {
+            subtext.style.setProperty('color', '#042f2e', 'important'); 
+            subtext.innerHTML = 'θα μιλούσαμε μαζί σας binary<br>αλλά η python είναι πιο απλή.';
+        }
+        if(btnBottomText) btnBottomText.innerText = 'ΑΠΛΑ';
+        if(toggleLink) toggleLink.style.setProperty('background-color', '#007AFF', 'important');
+        if(ctaBtn) ctaBtn.innerText = 'TECH SPECS';
+    } else {
+        body.classList.add('mode-simple');
+        if(imgTech) imgTech.classList.remove('active');
+        if(imgSimple) imgSimple.classList.add('active');
+        
+        if(subtext) {
+            subtext.style.setProperty('color', '#042f2e', 'important');
+            subtext.innerHTML = 'η τεχνολογία γίνεται κατανοητή<br>όταν την χειρίζονται άνθρωποι που μιλάνε απλά.';
+        }
+        if(btnBottomText) btnBottomText.innerText = 'ΤΕΧΝΙΚΑ';
+        if(toggleLink) toggleLink.style.setProperty('background-color', '#FF3B30', 'important');
+        if(ctaBtn) ctaBtn.innerText = 'ΜΑΘΕΤΕ ΠΕΡΙΣΣΟΤΕΡΑ';
+    }
+}
+
+/* --- 5. UI TOGGLE & RESET --- */
+function toggleModeUI(event) {
+    if (event) event.preventDefault();
+    const isTech = document.body.classList.contains('mode-tech');
+    applyModeLogic(isTech ? 'simple' : 'tech');
+}
+
+function resetToGateway() {
+    sessionStorage.removeItem('whp_session_active');
+    location.reload();
+}
