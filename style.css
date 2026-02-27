@@ -199,18 +199,16 @@ img { max-width: 100%; display: block; }
     background: rgba(255,255,255,0.1);
 }
 /* =========================================
-   4. HERO SECTIONS (RIGHT ALIGN)
-   ========================================= */
-//* =========================================
-   4. HERO SECTIONS (RIGHT ALIGN)
+   4. HERO SECTIONS (STABLE RIGHT ALIGN)
    ========================================= */
 .hero-wrapper {
     margin-top: 80px; 
     height: calc(100vh - 80px);
     display: flex;
     align-items: center;
-    justify-content: flex-end; 
+    justify-content: flex-end; /* Σπρώχνει το container προς τα δεξιά */
     position: relative;
+    width: 100%;
 }
 
 .photo-layers { position: absolute; inset: 0; z-index: 1; }
@@ -219,39 +217,40 @@ img { max-width: 100%; display: block; }
 .content-box {
     position: relative;
     z-index: 10;
-    padding-right: 5%; /* Σε iPad/Desktop σπρώχνει το κείμενο στο λευκό κενό */
-    padding-left: 0;
-    max-width: 650px;
+    width: 100%;
+    max-width: 550px; /* Περιορίζει το πλάτος για να μη βρίσκει στο πρόσωπο */
+    margin-right: 6%;  /* Απόσταση από τη δεξιά άκρη της οθόνης */
+    margin-left: auto; /* Το "κλειδί" για να μείνει δεξιά σε PC/Chrome */
     display: flex;
     flex-direction: column;
-    align-items: flex-end; /* Στοιχίζει τα "κουτιά" των κειμένων δεξιά */
+    align-items: flex-end; /* Στοιχίζει τα περιεχόμενα (κουμπί/κείμενο) δεξιά */
 }
 
-/* 1. Ο Τίτλος: Τέρμα δεξιά */
+/* 1. Ο Τίτλος: Επιβολή δεξιάς στοίχισης */
 .content-box h1 {
     text-align: right !important;
     width: 100%;
     margin: 0;
-    font-family: 'Sora', sans-serif; /* Elegant touch */
+    font-family: 'Sora', sans-serif;
 }
 
-/* 2. Ο Υπότιτλος: Το κουτί δεξιά, το κείμενο κεντραρισμένο εσωτερικά */
+/* 2. Ο Υπότιτλος: Κουτί δεξιά, γραμμές κέντρο μεταξύ τους */
 .text-simple-sub, .text-tech-sub { 
     color: var(--accent-simple-dark); 
     font-weight: 600; 
     font-size: 1.25rem; 
-    margin-top: 15px; 
+    margin-top: 20px; 
     line-height: 1.4;
-    text-align: center !important; /* Κεντράρει τις γραμμές μεταξύ τους */
-    margin-left: auto; 
+    text-align: center !important; /* Κεντράρει τις γραμμές εσωτερικά */
+    max-width: 380px; /* Συμμαζεμένο κουτί */
+    margin-left: auto; /* Σπρώχνει όλο το block δεξιά */
     margin-right: 0;
-    max-width: 350px; /* Το κρατάει στενό για να μην ακουμπάει το subject της φωτό */
     display: block;
 }
 
 .text-tech-sub { color: var(--accent-tech-dark); }
 
-/* 3. Το Κουμπί */
+/* 3. Το Κουμπί: Τέρμα δεξιά */
 .cta-primary {
     background: var(--cta-gradient);
     padding: 1.1rem 2.8rem;
@@ -263,7 +262,12 @@ img { max-width: 100%; display: block; }
     margin-top: 2.5rem;
     transition: all 0.3s ease;
     box-shadow: 0 10px 20px rgba(56, 189, 248, 0.2);
-    align-self: flex-end; 
+    align-self: flex-end; /* Force δεξιά στο flex container */
+}
+
+.cta-primary:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 15px 30px rgba(56, 189, 248, 0.4);
 }
 /* =========================================
    5. INTRO & ANIMATIONS
