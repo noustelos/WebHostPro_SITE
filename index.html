@@ -6,17 +6,30 @@
     <title>WebHostPro | Welcome</title>
     <link rel="preload" as="image" href="assets/blue_fem_1.jpeg">
 <link rel="preload" as="image" href="assets/red_fem_1.jpeg">
-    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Space+Grotesk:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">    
+<link rel="stylesheet" href="style.css">
+<style>
+    /* Ήπιο Fade-in για να δέσει με τα Blobs */
+    @keyframes simpleFade {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+    .smooth-entry {
+        animation: simpleFade 1.2s ease-in forwards;
+    }
+</style>
 </head>
 <body class="bg-deep-slate">
 
     <div id="intro-screen">
-        <div class="pulse-circle"></div>
         <div class="intro-logo">WEBHOSTPRO</div>
     </div>
-
-    <div id="gateway" class="active">
+<div class="organic-bg">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+</div>
+    <div id="gateway">
         <div class="glass-panel">
             <h2 class="gateway-title">Επιλέξτε την εμπειρία σας</h2>
             <div class="choice-buttons">
@@ -32,7 +45,10 @@
             <p class="gateway-hint">Δεν είστε σίγουροι; Ξεκινήστε απλά.</p>
         </div>
     </div>
-
+<div id="exit-overlay">
+    <div class="exit-logo">WEBHOSTPRO</div>
+</div>
+<body class="bg-deep-slate smooth-entry"></body>
     <script src="script.js"></script>
 </body>
 </html>

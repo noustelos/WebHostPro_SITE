@@ -9,19 +9,35 @@
     --accent-tech: #F97316;
     --accent-tech-dark: #EA580C;   
     --cta-gradient: linear-gradient(90deg, #38BDF8, #6366F1);
-    --honey-glass: linear-gradient(to bottom, rgba(40, 25, 5, 0.75), rgba(20, 12, 2, 0.88));
-}
+    --glass-bg: rgba(15, 23, 42, 0.55);
 
+}
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
-html, body { 
-    height: 100%; 
+/* ΤΜΗΜΑ 1 - ΔΙΟΡΘΩΣΗ */
+html, body {
+    font-family: 'Space Grotesk', sans-serif;
     background-color: var(--bg-deep);
     color: var(--text-light);
-    font-family: 'Space Grotesk', sans-serif;
-    overflow-x: hidden;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Κρίσιμο για να μην "φεύγει" η σελίδα δεξιά στο iPad */
 }
 
+.gateway-title {
+    font-family: 'Sora', sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: #FFFFFF !important; /* Επιβολή λευκού για iPad */
+}
+
+.intro-logo {
+    font-family: 'Syncopate', sans-serif;
+    color: #FFFFFF !important; /* Επιβολή λευκού για iPad */
+    font-weight: 700;
+    letter-spacing: 0.5em;
+}
 img { max-width: 100%; display: block; }
 
 /* =========================================
@@ -101,58 +117,91 @@ img { max-width: 100%; display: block; }
     align-items: center;
     justify-content: center;
     z-index: 9500;
-    background: var(--honey-glass);
+
+    background: rgba(5, 10, 20, 0.65);
+    backdrop-filter: blur(40px) saturate(180%);
+    -webkit-backdrop-filter: blur(40px) saturate(180%);
+
+    border-top: 1px solid rgba(255,255,255,0.08);
+
     transform: translateY(-100%);
-    transition: transform 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: transform 3.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 #gateway.active { transform: translateY(0); }
 
+/* ΤΜΗΜΑ 3 - ΔΙΟΡΘΩΣΗ */
 .glass-panel {
-    background: rgba(60, 35, 10, 0.65);
-    backdrop-filter: blur(18px);
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px); /* Απαραίτητο για το blur στο iPad */
+    border: 1px solid rgba(255,255,255,0.08);
+    color: #FFFFFF !important; /* Force white text */
+
     padding: 3rem;
-    border-radius: 24px;
-    border: 1px solid rgba(255, 200, 120, 0.25);
-    box-shadow: 0 40px 100px rgba(0,0,0,0.6);
+    border-radius: 28px;
+    box-shadow: 0 40px 120px rgba(0,0,0,0.6), inset 0 0 0 1px rgba(255,255,255,0.05);
     text-align: center;
-    width: min(90%, 500px);
+    width: min(90%, 520px);
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 1.2s cubic-bezier(0.22,1,0.36,1);
 }
 
-.gateway-title { font-size: 1.5rem; margin-bottom: 2rem; font-weight: 300; }
-.gateway-hint { margin-top: 1.5rem; font-size: 0.8rem; opacity: 0.6; }
+.glass-panel.show {
+    opacity: 1;
+    transform: translateY(0);
+}
 
+.gateway-title { 
+    font-size: 1.5rem; 
+    margin-bottom: 2rem; 
+    font-weight: 600; 
+    color: #FFFFFF !important;
+}
+
+.gateway-hint { 
+    margin-top: 1.5rem; 
+    font-size: 0.8rem; 
+    opacity: 0.9; 
+    color: #FFFFFF !important; 
+}
 .choice-buttons { display: flex; flex-direction: column; gap: 1rem; }
 
 .glass-btn {
-    background: rgba(255,255,255,0.05);
+    position: relative;
+    background: rgba(255,255,255,0.06);
     border: 1px solid rgba(255,255,255,0.1);
-    padding: 1.4rem; /* Λίγο περισσότερο padding για τα μεγαλύτερα γράμματα */
-    border-radius: 12px;
+
+    padding: 1.6rem;
+    border-radius: 16px;
     cursor: pointer;
-    transition: all 0.3s ease;
-    text-align: center;
+
+    transition: all 0.35s ease;
+    overflow: hidden;
 }
 
-/* Ευθυγράμμιση μεγέθους στο Gateway */
-.btn-sub { 
-    display: block; 
-    font-size: 1.1rem; 
-    font-weight: 700;
-    letter-spacing: 0.05em; 
-    margin-bottom: 4px; 
-    opacity: 1; 
+.glass-btn::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg, transparent, rgba(255,255,255,0.15), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.8s ease;
 }
 
-.btn-main { 
-    font-size: 1.1rem; 
-    font-weight: 900; 
-    letter-spacing: 0.1em; 
+.glass-btn:hover::before {
+    transform: translateX(100%);
 }
 
-.glass-btn:hover { background: rgba(255,255,255,0.1); transform: translateY(-2px); }
-
+.glass-btn:hover {
+    transform: translateY(-4px);
+    background: rgba(255,255,255,0.1);
+}
 /* =========================================
+   4. HERO SECTIONS (RIGHT ALIGN)
+   ========================================= */
+//* =========================================
    4. HERO SECTIONS (RIGHT ALIGN)
    ========================================= */
 .hero-wrapper {
@@ -170,18 +219,39 @@ img { max-width: 100%; display: block; }
 .content-box {
     position: relative;
     z-index: 10;
-    padding-right: 10%; 
+    padding-right: 5%; /* Σε iPad/Desktop σπρώχνει το κείμενο στο λευκό κενό */
     padding-left: 0;
     max-width: 650px;
-    text-align: left; 
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: flex-end; /* Στοιχίζει τα "κουτιά" των κειμένων δεξιά */
 }
 
-.text-simple-sub { color: var(--accent-simple-dark); font-weight: 600; font-size: 1.25rem; margin-top: 15px; line-height: 1.4; }
-.text-tech-sub { color: var(--accent-tech-dark); font-weight: 600; font-size: 1.25rem; margin-top: 15px; line-height: 1.4; }
+/* 1. Ο Τίτλος: Τέρμα δεξιά */
+.content-box h1 {
+    text-align: right !important;
+    width: 100%;
+    margin: 0;
+    font-family: 'Sora', sans-serif; /* Elegant touch */
+}
 
+/* 2. Ο Υπότιτλος: Το κουτί δεξιά, το κείμενο κεντραρισμένο εσωτερικά */
+.text-simple-sub, .text-tech-sub { 
+    color: var(--accent-simple-dark); 
+    font-weight: 600; 
+    font-size: 1.25rem; 
+    margin-top: 15px; 
+    line-height: 1.4;
+    text-align: center !important; /* Κεντράρει τις γραμμές μεταξύ τους */
+    margin-left: auto; 
+    margin-right: 0;
+    max-width: 350px; /* Το κρατάει στενό για να μην ακουμπάει το subject της φωτό */
+    display: block;
+}
+
+.text-tech-sub { color: var(--accent-tech-dark); }
+
+/* 3. Το Κουμπί */
 .cta-primary {
     background: var(--cta-gradient);
     padding: 1.1rem 2.8rem;
@@ -193,13 +263,8 @@ img { max-width: 100%; display: block; }
     margin-top: 2.5rem;
     transition: all 0.3s ease;
     box-shadow: 0 10px 20px rgba(56, 189, 248, 0.2);
+    align-self: flex-end; 
 }
-
-.cta-primary:hover {
-    transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 15px 30px rgba(56, 189, 248, 0.4);
-}
-
 /* =========================================
    5. INTRO & ANIMATIONS
    ========================================= */
@@ -212,20 +277,6 @@ img { max-width: 100%; display: block; }
     flex-direction: column;
     align-items: center;
     justify-content: center;
-}
-
-.pulse-circle {
-    width: 80px;
-    height: 80px;
-    background: var(--accent-simple);
-    border-radius: 50%;
-    animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-    0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.7); }
-    70% { transform: scale(1); box-shadow: 0 0 0 20px rgba(56, 189, 248, 0); }
-    100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(56, 189, 248, 0); }
 }
 
 /* =========================================
@@ -250,4 +301,99 @@ img { max-width: 100%; display: block; }
         align-items: center; 
         max-width: 100%;
     }
+}
+/* ... στο τέλος του αρχείου style.css ... */
+
+#exit-overlay {
+    position: fixed;
+    inset: 0;
+    background: #0F172A; /* Το βαθύ μπλε σου */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9000; /* Πίσω από το gateway (9500) αλλά πάνω από τα άλλα */
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.8s ease;
+}
+
+#exit-overlay.show {
+    opacity: 1;
+}
+
+/* ΤΜΗΜΑ 6 - ΔΙΟΡΘΩΣΗ */
+.exit-logo {
+    font-family: 'Syncopate', sans-serif;
+    font-weight: 700;
+    color: #FFFFFF !important; /* Force white */
+    font-size: 1.2rem;
+    letter-spacing: 1.5em;
+    text-indent: 1.5em;
+    opacity: 0;
+    transform: scale(0.9);
+    transition: all 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+    text-shadow: 0 0 20px rgba(255,255,255,0.15);
+}
+.organic-bg {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    z-index: 0;
+    background: radial-gradient(circle at 20% 20%, #0B1120, #05070F 60%);
+}
+
+.blob {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.6;
+    animation: float 18s infinite ease-in-out alternate;
+}
+
+.blob-1 {
+    background: #38BDF8;
+    top: -150px;
+    left: -150px;
+}
+
+.blob-2 {
+    background: #6366F1;
+    bottom: -200px;
+    right: -150px;
+    animation-delay: 4s;
+}
+
+.blob-3 {
+    background: #F97316;
+    top: 40%;
+    left: 50%;
+    animation-delay: 8s;
+}
+
+@keyframes float {
+    0% { transform: translateY(0) translateX(0) scale(1); }
+    100% { transform: translateY(-80px) translateX(60px) scale(1.1); }
+}
+/* Intro fade */
+.fade-out {
+    opacity: 0;
+    transition: opacity 1.4s ease;
+}
+
+/* Gateway active (slide down from top) */
+#gateway.active {
+    transform: translateY(0);
+}
+
+/* Slide up on exit */
+#gateway.slide-up {
+    transform: translateY(-100%);
+}
+
+/* Exit overlay */
+#exit-overlay.show .exit-logo {
+    opacity: 0.8;
+    transform: scale(1);
 }
