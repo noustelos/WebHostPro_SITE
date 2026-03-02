@@ -401,3 +401,8 @@ img { max-width: 100%; display: block; }
     opacity: 0.8;
     transform: scale(1);
 }
+.btn-sub {
+    color: #FFFFFF !important; /* Το λευκό που θέλεις */
+    opacity: 0.9; /* Προαιρετικά, για να είναι ελαφρώς πιο elegant */
+    display: block; /* Για να κάθεται σωστά πάνω από το SIMPLE/TECHNICAL */
+}
